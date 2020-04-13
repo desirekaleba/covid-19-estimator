@@ -31,22 +31,54 @@ class Challenge {
         this.severeImpact.hospitalBedsByRequestedTime = availableBeds - this.severeImpact.severeCasesByRequestedTime;
     }
 
+    challengeThree() {
+        const fivePercOfInfectedByTime = this.discardDecimal(this.impact.infectionsByRequestedTime * 0.05);
+        const fivePercOfSevereInfectedByTime = this.discardDecimal(this.severeImpact.infectionsByRequestedTime * 0.05);
+
+        const twoPercOfInfectedByTime = this.discardDecimal(this.impact.infectionsByRequestedTime * 0.02);
+        const twoPercOfSevereInfectedByTime = this.discardDecimal(this.severeImpact.infectionsByRequestedTime * 0.02);
+
+        this.impact.casesForICUByRequestedTime = fivePercOfInfectedByTime;
+        this.severeImpact.casesForICUByRequestedTime = fivePercOfSevereInfectedByTime;
+
+        this.impact.casesForVentilatorsByRequestedTime = twoPercOfInfectedByTime;
+        this.severeImpact.casesForVentilatorsByRequestedTime = twoPercOfSevereInfectedByTime;
+
+        this.impact.dollarsInFlight = this.estimateDailyIncome(this.data, this.impact);
+        this.severeImpact.dollarsInFlight = this.estimateDailyIncome(this.data, this.severeImpact);
+    }
+
     estimateInfected(data, type) {
+        
+        const days = this.computeDays(data);
+        const factor = this.discardDecimal(days / 3);
+        let result = type.currentlyInfected * (Math.pow(2, factor));
+
+        return result;
+    }
+
+    estimateDailyIncome(data, type) {
+        const days = this.computeDays(data);
+
+        let amount = this.discardDecimal((type.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD) / days);
+
+        return amount;
+    }
+
+    computeDays(data) {
+        let days;
+
         if (data.periodType == 'days') {
-            data.timeToElapse = data.timeToElapse;
+            days = data.timeToElapse;
         } else if (data.periodType == 'weeks') {
-            data.timeToElapse *= 7;
+            days = data.timeToElapse * 7;
         } else if (data.periodType == 'months') {
-            data.timeToElapse *= 30;
+            days = data.timeToElapse * 30;
         } else {
             throw new Error(`${data.periodType} not a period time, expected: days, weeks or months`
                 `${data.periodType} not a period time, expected: days, weeks or months`);
         }
-
-        const factor = this.discardDecimal(data.timeToElapse / 3);
-        let result = type.currentlyInfected * (Math.pow(2, factor));
-
-        return result;
+        return days;
     }
 }
 
