@@ -1,18 +1,19 @@
-import Challenge from './challenge.js';
+import Challenge from './challenge';
 
-const impact = {}, severeImpact = {};
+const impact = {};
+const severeImpact = {};
 
 const covid19ImpactEstimator = (data) => {
-    const challenge = new Challenge(data, impact, severeImpact);
-    challenge.challengeOne();
-    challenge.challengeTwo();
-    challenge.challengeThree();
+  const challenge = new Challenge(data, impact, severeImpact);
+  challenge.challengeOne();
+  challenge.challengeTwo();
+  challenge.challengeThree();
 
-    return {
-        data,
-        impact,
-        severeImpact
-    };
+  return {
+    data,
+    impact,
+    severeImpact
+  };
 };
 
 export default covid19ImpactEstimator;
