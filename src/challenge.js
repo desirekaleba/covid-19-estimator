@@ -18,6 +18,19 @@ class Challenge {
 
     }
 
+    challengeTwo() {
+        const fifteenP = this.discardDecimal(this.impact.infectionsByRequestedTime * 0.15);
+        const severeFifteenP = this.discardDecimal(this.severeImpact.infectionsByRequestedTime * 0.15);
+
+        this.impact.severeCasesByRequestedTime = fifteenP;
+        this.severeImpact.severeCasesByRequestedTime = severeFifteenP;
+
+        const availableBeds = this.discardDecimal(this.data.totalHospitalBeds * 0.35);
+
+        this.impact.hospitalBedsByRequestedTime = availableBeds - this.impact.severeCasesByRequestedTime;
+        this.severeImpact.hospitalBedsByRequestedTime = availableBeds - this.severeImpact.severeCasesByRequestedTime;
+    }
+
     estimateInfected(data, type) {
         if (data.periodType == 'days') {
             data.timeToElapse = data.timeToElapse;
