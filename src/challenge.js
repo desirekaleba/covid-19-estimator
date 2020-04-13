@@ -75,8 +75,7 @@ class Challenge {
         } else if (data.periodType == 'months') {
             days = data.timeToElapse * 30;
         } else {
-            throw new Error(`${data.periodType} not a period time, expected: days, weeks or months`
-                `${data.periodType} not a period time, expected: days, weeks or months`);
+            throw new Error(data.periodType + "  not a period time, expected: days, weeks or months");
         }
         return days;
     }
