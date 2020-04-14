@@ -5,7 +5,7 @@ class Challenge {
     this.severeImpact = severeImpact;
     this.discardDecimal = (number) => Math.trunc(number);
     this.computeDays = (input) => {
-      let days;
+      let days = null;
       if (input.periodType === 'days') {
         days = this.discardDecimal(input.timeToElapse);
       } else if (input.periodType === 'weeks') {
@@ -48,8 +48,12 @@ class Challenge {
     );
     const iSevCasesByT = this.impact.severeCasesByRequestedTime;
     const sISevCasesByT = this.severeImpact.severeCasesByRequestedTime;
-    this.impact.hospitalBedsByRequestedTime = this.discardDecimal(availableBeds - iSevCasesByT);
-    this.severeImpact.hospitalBedsByRequestedTime = this.discardDecimal(availableBeds - sISevCasesByT);
+    this.impact.hospitalBedsByRequestedTime = this.discardDecimal(
+      availableBeds - iSevCasesByT
+    );
+    this.severeImpact.hospitalBedsByRequestedTime = this.discardDecimal(
+      availableBeds - sISevCasesByT
+    );
   }
 
   challengeThree() {
