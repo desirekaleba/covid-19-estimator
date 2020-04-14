@@ -44,15 +44,15 @@ class Challenge {
     this.impact.severeCasesByRequestedTime = fifteenP;
     this.severeImpact.severeCasesByRequestedTime = severeFifteenP;
     const availableBeds = this.discardDecimal(
-      this.data.totalHospitalBeds * 0.3
+      this.data.totalHospitalBeds * 0.35
     );
     const iSevCasesByT = this.impact.severeCasesByRequestedTime;
     const sISevCasesByT = this.severeImpact.severeCasesByRequestedTime;
     this.impact.hospitalBedsByRequestedTime = this.discardDecimal(
-      availableBeds - iSevCasesByT + 1
+      (availableBeds - iSevCasesByT) + 1
     );
     this.severeImpact.hospitalBedsByRequestedTime = this.discardDecimal(
-      availableBeds - sISevCasesByT + 1
+      (availableBeds - sISevCasesByT) + 1
     );
   }
 
