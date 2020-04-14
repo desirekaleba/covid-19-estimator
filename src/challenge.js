@@ -3,7 +3,7 @@ class Challenge {
     this.data = data;
     this.impact = impact;
     this.severeImpact = severeImpact;
-    this.discardDecimal = (number) => ~~number;
+    this.discardDecimal = (number) => parseInt(number, 10);
     this.computeDays = (input) => {
       let days;
       if (input.periodType === 'days') {
