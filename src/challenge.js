@@ -49,10 +49,10 @@ class Challenge {
     const iSevCasesByT = this.impact.severeCasesByRequestedTime;
     const sISevCasesByT = this.severeImpact.severeCasesByRequestedTime;
     this.impact.hospitalBedsByRequestedTime = this.discardDecimal(
-      Number(availableBeds - iSevCasesByT) + 1
+      Number(availableBeds - iSevCasesByT)
     );
     this.severeImpact.hospitalBedsByRequestedTime = this.discardDecimal(
-      Number(availableBeds - sISevCasesByT) + 1
+      Number(availableBeds - sISevCasesByT)
     );
   }
 
