@@ -7,11 +7,11 @@ class Challenge {
     this.computeDays = (input) => {
       let days;
       if (input.periodType === 'days') {
-        days = input.timeToElapse;
+        days = this.discardDecimal(input.timeToElapse);
       } else if (input.periodType === 'weeks') {
-        days = input.timeToElapse * 7;
+        days = this.discardDecimal(input.timeToElapse * 7);
       } else if (input.periodType === 'months') {
-        days = input.timeToElapse * 30;
+        days = this.discardDecimal(input.timeToElapse * 30);
       } else {
         throw new Error(
           `${input.periodType} not a period time, expected: days, weeks or months`
@@ -82,7 +82,7 @@ class Challenge {
   estimateInfected(data, type) {
     const days = this.computeDays(data);
     const factor = this.discardDecimal(days / 3);
-    const result = type.currentlyInfected * 2 ** factor;
+    const result = this.discardDecimal(type.currentlyInfected * 2 ** factor);
     return result;
   }
 
