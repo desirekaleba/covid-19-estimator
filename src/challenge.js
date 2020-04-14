@@ -44,7 +44,7 @@ class Challenge {
     this.impact.severeCasesByRequestedTime = fifteenP;
     this.severeImpact.severeCasesByRequestedTime = severeFifteenP;
     const availableBeds = this.discardDecimal(
-      this.data.totalHospitalBeds * 0.35
+      this.data.totalHospitalBeds * 0.3
     );
     const iSevCasesByT = this.impact.severeCasesByRequestedTime;
     const sISevCasesByT = this.severeImpact.severeCasesByRequestedTime;
